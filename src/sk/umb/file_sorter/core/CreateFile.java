@@ -22,7 +22,7 @@ public class CreateFile {
 		if (!file.exists())
 			file.mkdirs();
 		else {
-			throw new CreateFileException("File is not create, because is exist");
+			throw new MyFileException("File is not create, because is exist");
 		}
 
 		return file;

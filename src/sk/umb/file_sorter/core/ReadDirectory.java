@@ -17,25 +17,37 @@ public class ReadDirectory {
 		return singleton;
 	}
 
-	public String[] getSubFile(final String path) {
-		String[] subFile = new File(path).list();
-		;
+	public File[] getSubFile(final String path) throws MyFileException {
+		File file = new File(path);
+
+		if (!file.exists())
+			throw new MyFileException("File don't exist");
+
+		String[] subFile = file.list();
+
+		if (subFile.length == 0)
+			throw new MyFileException("File is empty");
+
 		List<String> noHidenFile = new ArrayList<>();
 
 		for (int i = 0; i < subFile.length; i++) {
 			String tempPath = path + subFile[i];
-
-			if (new File(tempPath).isHidden()) {
+			File tempFile = new File(tempPath);
+			if (tempFile.isHidden()) {
 				System.out.println("Hidem file: " + tempPath);
-			} else {
-				System.out.println("Add no hiden file: " + tempPath);
-				noHidenFile.add(subFile[i]);
+				continue;
 			}
+
+			if (tempFile.isDirectory()) {
+				System.out.println("Directory: " + tempPath);
+				continue;
+			}
+			noHidenFile.add(subFile[i]);
 		}
 
-		String[] noHiden = new String[noHidenFile.size()];
+		File[] noHiden = new File[noHidenFile.size()];
 		for (int i = 0; i < noHiden.length; i++) {
-			noHiden[i] = noHidenFile.get(i);
+			noHiden[i] = new File(path + noHidenFile.get(i));
 		}
 
 		return noHiden;
