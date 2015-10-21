@@ -21,7 +21,7 @@ public class CreateFolderTest {
 			System.exit(0);
 		}
 
-		String[] filesName = { "je", "to", "super", "appka", "smile_emoticon" };
+		final String[] filesName = { "je", "to", "super", "appka", "smile_emoticon" };
 
 		for (int i = 0; i < filesName.length; i++) {
 			String tempPath = path + filesName[i];
