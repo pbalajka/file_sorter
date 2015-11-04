@@ -52,4 +52,19 @@ public class ReadDirectory {
 
 		return noHiden;
 	}
+
+	public String[] getPostfix(final File[] files) {
+		List<String> postfix = new ArrayList<String>();
+		for (int i = 0; i < files.length; i++) {
+			if (files[i].getName().contains(".")) {
+				if (!postfix.contains(files[i].getName().substring(files[i].getName().lastIndexOf(".") + 1))) {
+					postfix.add(files[i].getName().substring(files[i].getName().lastIndexOf(".") + 1));
+				}
+			} else {
+				System.out.println("Name: " + files[i].getName() + "postfix: have not postfix.");
+			}
+		}
+
+		return postfix.toArray(new String[postfix.size()]);
+	}
 }

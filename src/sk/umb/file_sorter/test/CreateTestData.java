@@ -17,7 +17,7 @@ public class CreateTestData {
 				System.exit(1);
 			}
 		} else
-			System.out.println("Directory exists");
+			System.out.println("Test directory exists");
 
 		for (int i = 0; i < Variable.TEST_DIRECTORY_NAMES.length; i++) {
 			File temp = new File(Variable.PATH + Variable.TEST_DIRECTORY_NAMES[i]);

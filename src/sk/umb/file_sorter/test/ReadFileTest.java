@@ -11,12 +11,10 @@ public class ReadFileTest {
 		File[] files;
 		try {
 			files = ReadDirectory.getInstance().getSubFile(Variable.PATH);
-
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].getName().contains("."))
-					System.out.println("Name: " + files[i].getName() + " ,postfix: " + files[i].getName().substring(files[i].getName().lastIndexOf(".") + 1));
-				else
-					System.out.println("Name: " + files[i].getName() + "postfix: have not postfix.");
+			String[] postfix = ReadDirectory.getInstance().getPostfix(files);
+			
+			for(int i = 0; i < postfix.length; i++) {
+				System.out.println(postfix[i]);
 			}
 		} catch (MyFileException e) {
 			// TODO Auto-generated catch block
