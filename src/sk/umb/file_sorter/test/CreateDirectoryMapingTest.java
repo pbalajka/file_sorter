@@ -1,8 +1,8 @@
 package sk.umb.file_sorter.test;
 
 import java.io.File;
-
-import sk.umb.file_sorter.core.DirectoryMaping;
+import sk.umb.file_sorter.core.Directory;
+import sk.umb.file_sorter.core.SortFile;
 import sk.umb.file_sorter.core.MyFileException;
 import sk.umb.file_sorter.core.ReadDirectory;
 
@@ -11,16 +11,15 @@ public class CreateDirectoryMapingTest {
 	public static void main(String[] args) {
 		CreateTestData.main(new String[] { "CreateTestData, Test" });
 
-		DirectoryMaping documents = new DirectoryMaping(Variable.DOCUMENTS);
+		Directory documents = new Directory(Variable.DOCUMENTS, Variable.PATH);
 		documents.addPostfix("pdf", "odt");
-		DirectoryMaping videos = new DirectoryMaping(Variable.VIDEOS);
+		Directory videos = new Directory(Variable.VIDEOS, Variable.PATH);
 		videos.addPostfix("mkv", "tft");
-		DirectoryMaping musics = new DirectoryMaping(Variable.MUSICS);
+		Directory musics = new Directory(Variable.MUSICS, Variable.PATH);
 		musics.addPostfix("mp3");
-		DirectoryMaping picture = new DirectoryMaping(Variable.Picture);
+		Directory pictures = new Directory(Variable.Picture, Variable.PATH);
 		musics.addPostfix("jpg", "JPG", "png");
-		DirectoryMaping[] directoryMaps = new DirectoryMaping[] { documents, videos, musics, picture };
-
+		
 		File[] files = null;
 		try {
 			files = ReadDirectory.getInstance().getSubFile(Variable.PATH);
@@ -32,27 +31,47 @@ public class CreateDirectoryMapingTest {
 		try {
 			Thread.sleep(2500);
 		} catch (InterruptedException e) {
-			System.out.println("Main trehad don't sleep");
+			System.out.println("Main thretad don't sleep");
+		}
+		System.out.println("--------------------------------------");
+		System.out.println("Sorting");
+
+		SortFile.getInstance().sortFile(files, documents, videos, musics, pictures);
+
+		CreateDirectoryMapingTest.execute(documents);
+		CreateDirectoryMapingTest.execute(videos);
+		CreateDirectoryMapingTest.execute(musics);
+		CreateDirectoryMapingTest.execute(pictures);
+
+	}
+
+	private static void execute(final Directory dir) {
+		if (dir.isEmpty()) {
+			System.out.println("Name directory: " + dir.getName() + " is empty, do not create");
+			return;
 		}
 
-		System.out.println("Create contain directory");
-		String[] postfix = ReadDirectory.getInstance().getPostfix(files);
-		for (int i = 0; i < directoryMaps.length; i++) {
-			File newFile = new File(Variable.PATH + directoryMaps[i].getName());
-			if (newFile.exists())
-				continue;
+		CreateDirectoryMapingTest.printFile(dir);
+		CreateDirectoryMapingTest.createDirectory(dir);
+	}
 
-			for (int j = 0; j < postfix.length; j++) {
-				if (directoryMaps[i].containsPostfix(postfix[j])) {
-					if (!newFile.mkdir()) {
-						System.out.println("Error: Can't create directory: " + newFile.getName());
-					}
-					break;
-				}
-			}
-
+	private static void printFile(final Directory dir) {
+		System.out.println("Name directory: " + dir.getName());
+		for (File temp : dir.getFile()) {
+			System.out.println(temp.getName());
 		}
-		System.out.println("Test success finish");
+		System.out.println(" ");
+	}
 
+	private static boolean createDirectory(final Directory dir) {
+		File file = new File(dir.getPath());
+
+		if (file.exists())
+			return true;
+		if (file.mkdirs())
+			return true;
+		
+		
+		return false;
 	}
 }

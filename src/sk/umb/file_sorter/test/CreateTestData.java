@@ -9,6 +9,7 @@ public class CreateTestData {
 		System.out.println("User: " + Variable.USER_NAME);
 		System.out.println("Operating system: " + Variable.OPERATING_SYSTEM);
 		System.out.println("Path: " + Variable.PATH);
+		System.out.println("---------------------------------- ");
 
 		File file = new File(Variable.PATH);
 		if (!file.exists()) {
@@ -21,6 +22,10 @@ public class CreateTestData {
 
 		for (int i = 0; i < Variable.TEST_DIRECTORY_NAMES.length; i++) {
 			File temp = new File(Variable.PATH + Variable.TEST_DIRECTORY_NAMES[i]);
+			if(temp.exists()) {
+				System.out.println("Directory " + temp.getName() + " exist, no create");
+				continue;
+			}
 			if (!temp.mkdir()) {
 				System.out.println("Error: Can't create directory: " + temp.getName());
 			}
@@ -32,7 +37,7 @@ public class CreateTestData {
 				if (!temp.exists())
 					temp.createNewFile();
 				else
-					System.out.println("File is exist: " + temp.getName());
+					System.out.println("File exist: " + temp.getName() + " do not create");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
