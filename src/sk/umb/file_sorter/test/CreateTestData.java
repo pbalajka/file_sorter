@@ -9,8 +9,8 @@ public class CreateTestData {
 		System.out.println("User: " + Variable.USER_NAME);
 		System.out.println("Operating system: " + Variable.OPERATING_SYSTEM);
 		System.out.println("Path: " + Variable.PATH);
-		System.out.println("---------------------------------- ");
-
+		System.out.println("------------------------------------");
+		
 		File file = new File(Variable.PATH);
 		if (!file.exists()) {
 			if (!file.mkdir()) {
@@ -37,7 +37,7 @@ public class CreateTestData {
 				if (!temp.exists())
 					temp.createNewFile();
 				else
-					System.out.println("File exist: " + temp.getName() + " do not create");
+					System.out.println("File exist: " + temp.getName() + " no create");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

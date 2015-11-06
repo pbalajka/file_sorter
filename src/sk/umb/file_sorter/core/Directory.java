@@ -65,6 +65,6 @@ public class Directory {
 	}
 	
 	public String getPath() {
-		return this.path + this.nameDirectory;
+		return this.path + this.nameDirectory + "/";
 	}
  }

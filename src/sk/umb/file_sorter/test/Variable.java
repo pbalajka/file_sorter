@@ -7,7 +7,7 @@ public class Variable {
 	public static final String OPERATING_SYSTEM = System.getProperty("os.name");
 	public static final String PATH = LINUX.equals(OPERATING_SYSTEM) || MAC.equals(OPERATING_SYSTEM) ? new String("/home/" + USER_NAME + "/test/") : "Windows";
 	public static final String[] FILE_NAMES = {"je", "to", "super", "appka", "smile_emoticon" };
-	public static final String[] TEST_FILE_NAMES = {"wtf.tft", "pavol.pdf", "istvan.pdf", "branko.mp3", "santa.odt", "za.ker.rak.mkv" , ".hidenFile", "chytak_bez_pripony", "palko.mp3" };
+	public static final String[] TEST_FILE_NAMES = {"film.mp4", "titulky.tft", "dokument.pdf","hudba.waw","wtf.tft", "pavol.pdf", "istvan.pdf", "branko.mp3", "santa.odt", "za.ker.rak.mkv" , ".hidenFile", "chytak_bez_pripony", "palko.mp3" };
 	public static final String[] TEST_DIRECTORY_NAMES = {"Santa", "Klaus", "Vianoce", ".hiden_direcotry"};
 	public static final String DOCUMENTS = "Dokumenty";
 	public static final String MUSICS = "Hudba";
