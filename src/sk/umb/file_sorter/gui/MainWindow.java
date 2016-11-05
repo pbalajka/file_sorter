@@ -6,7 +6,5 @@ package sk.umb.file_sorter.gui;
  */
 
 public class MainWindow {
-	
-	/*Hadam to ide*/
 
 }
